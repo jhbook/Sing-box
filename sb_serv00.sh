@@ -14,6 +14,7 @@ export LC_ALL=C
 USERNAME=$(whoami)
 HOSTNAME=$(hostname)
 export UUID=${UUID:-'bc97f674-c578-4940-9234-0a1da46041b9'}
+export UUID=${password:-'admin123'}
 export NEZHA_SERVER=${NEZHA_SERVER:-''} 
 export NEZHA_PORT=${NEZHA_PORT:-'5555'}     
 export NEZHA_KEY=${NEZHA_KEY:-''} 
@@ -253,7 +254,7 @@ generate_config() {
       "users": [
         {
           "uuid": "$UUID",
-          "password": "admin123"
+          "password": "$password"
         }
       ],
       "congestion_control": "bbr",
@@ -475,7 +476,7 @@ vmess://$(echo "{ \"v\": \"2\", \"ps\": \"$ISP\", \"add\": \"$CFIP\", \"port\": 
 
 hysteria2://$UUID@$IP:$hy2_port/?sni=www.bing.com&alpn=h3&insecure=1#$ISP
 
-tuic://$UUID:admin123@$IP:$tuic_port?sni=www.bing.com&congestion_control=bbr&udp_relay_mode=native&alpn=h3&allow_insecure=1#$ISP
+tuic://$UUID:$password@$IP:$tuic_port?sni=www.bing.com&congestion_control=bbr&udp_relay_mode=native&alpn=h3&allow_insecure=1#$ISP
 EOF
 cat list.txt
 purple "\n$WORKDIR/list.txt saved successfully"
